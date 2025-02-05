@@ -1,18 +1,22 @@
 <?php
 
+namespace App\Controller;
+
+use App\Models\User;
+
 class AuthController {
     private $userModel;
     
     public function __construct() {
-        $this->userModel = new UserModel();
+        $this->userModel = new User();
     }
     
     public function showLogin() {
-        require 'views/auth/login.php';
+        require __DIR__ . '/../views/auth/login.blade.php';
     }
     
     public function showRegister() {
-        require 'views/auth/register.php';
+        require __DIR__ . '/../views/auth/register.blade.php';
     }
     
     public function login() {
@@ -29,7 +33,7 @@ class AuthController {
             }
             
             $error = 'Invalid username or password';
-            require 'views/auth/login.php';
+            require 'views/auth/login.blade.php';
         }
     }
     
@@ -62,7 +66,7 @@ class AuthController {
                 }
             }
             
-            require 'views/auth/register.php';
+            // require 'views/auth/register.php';
         }
     }
 }

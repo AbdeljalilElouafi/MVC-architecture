@@ -2,7 +2,7 @@
 
 namespace App\Models;
 
-use Core\Database;
+use App\Core\Database;
 
 class User {
     private $db;
@@ -12,9 +12,14 @@ class User {
     }
 
     public function getUser ($id) {
-        $stmt = $this->db->prepare("SELECT * FROM public.\"user\" WHERE id = :id");
-        $stmt->execute(['id' => $id]);
-        return $stmt->fetch();
+        try {
+            $stmt = $this->db->prepare("SELECT * FROM public.user WHERE id = :id");
+            $stmt->execute(['id' => $id]);
+            return $stmt->fetch(PDO::FETCH_ASSOC);
+        } catch (\PDOException $e) {
+            error_log("Failed to fetch article: " . $e->getMessage());
+            return null;
+        }
     }
 
  

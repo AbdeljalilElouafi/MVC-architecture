@@ -23,9 +23,8 @@ class ArticleController {
 
             require_once '../app/views/articles/index.php';
         } catch (\Exception $e) {
-            error_log("Error in index action: " . $e->getMessage());
 
-            require_once '../app/views/error/500.php';
+            require_once '../app/views/error/405.php';
         }
     }
     public function show($id) {
