@@ -24,5 +24,7 @@
         <p>No articles available.</p>
     <?php endif; ?>
     </ul>
+    <a href="/auth/login" class="button">Login</a>
+
 </body>
 </html>
