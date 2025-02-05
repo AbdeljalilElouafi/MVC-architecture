@@ -20,6 +20,7 @@ class Article {
 
     public function getAllArticles() {
         try {
+            echo'in the Article method!';
             $stmt = $this->db->query("SELECT * FROM public.articles");
             $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
             return $results;

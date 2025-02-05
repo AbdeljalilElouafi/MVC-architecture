@@ -22,7 +22,7 @@ class ArticleController extends Controller {
             // echo'in the index of articlecontroller';
             $articles = $this->articleModel->getAllArticles();
 
-            $this->render('articles/index');
+            $this->render('articles/index', ['articles'=>$articles]);
             // require_once '../app/views/articles/index.php';
         } catch (\Exception $e) {
 
@@ -40,7 +40,7 @@ class ArticleController extends Controller {
             return;
         }
 
-        $this->render('articles/show');
+        $this->render('articles/show', ['article'=>$article]);
 
         // require '../app/views/articles/show.php';
     }
