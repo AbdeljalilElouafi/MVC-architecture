@@ -20,10 +20,10 @@ class Router {
     }
 
     public function dispatch($requestUri, $requestMethod) {
-        // Remove query strings from URI
+
         $requestUri = strtok($requestUri, '?');
         
-        // Remove trailing slashes
+
         $requestUri = rtrim($requestUri, '/');
         if (empty($requestUri)) {
             $requestUri = '/';
@@ -34,10 +34,10 @@ class Router {
                 continue;
             }
 
-            // Check if route has parameters
+
             if (strpos($route['path'], '{') !== false) {
                 if (preg_match($route['pattern'], $requestUri, $matches)) {
-                    // Filter out numeric keys
+
                     $params = array_filter($matches, function($key) {
                         return !is_numeric($key);
                     }, ARRAY_FILTER_USE_KEY);
@@ -45,13 +45,13 @@ class Router {
                     return $this->executeRoute($route, $params);
                 }
             } 
-            // Simple route matching
+
             elseif ($route['path'] === $requestUri) {
                 return $this->executeRoute($route);
             }
         }
 
-        // No route found
+
         $this->handleNotFound();
     }
 
@@ -69,7 +69,7 @@ class Router {
                 throw new \Exception("Action {$action} not found in controller {$controllerClass}");
             }
 
-            // If we have parameters, pass them to the action
+
             if (!empty($params)) {
                 return call_user_func_array([$controller, $action], $params);
             }
@@ -77,7 +77,7 @@ class Router {
             return $controller->$action();
 
         } catch (\Exception $e) {
-            // Log the error
+
             error_log($e->getMessage());
             $this->handleError($e);
         }

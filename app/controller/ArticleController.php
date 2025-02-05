@@ -3,8 +3,9 @@
 
 namespace App\Controller;
 use App\Models\Article;
+use App\Core\Controller;
 
-class ArticleController {
+class ArticleController extends Controller {
     private $articleModel;
 
     public function __construct() {
@@ -18,13 +19,16 @@ class ArticleController {
 
     public function index() {
         try {
-            echo'in the index of articlecontroller';
+            // echo'in the index of articlecontroller';
             $articles = $this->articleModel->getAllArticles();
 
-            require_once '../app/views/articles/index.php';
+            $this->render('articles/index');
+            // require_once '../app/views/articles/index.php';
         } catch (\Exception $e) {
 
-            require_once '../app/views/error/405.php';
+            $this->render('error/405');
+
+            // require_once '../app/views/error/405.php';
         }
     }
     public function show($id) {
@@ -35,7 +39,10 @@ class ArticleController {
             require '../app/views/error/404.php';
             return;
         }
-        require '../app/views/articles/show.php';
+
+        $this->render('articles/show');
+
+        // require '../app/views/articles/show.php';
     }
 
     public function create() {
@@ -48,6 +55,9 @@ class ArticleController {
             $this->articleModel->createArticle($data);
             header('Location: /articles');
         }
-        require_once '../app/views/articles/create.php';
+
+        $this->render('articles/create');
+
+        // require_once '../app/views/articles/create.php';
     }
 }

@@ -3,8 +3,10 @@
 namespace App\Controller;
 
 use App\Models\User;
+use App\Core\Controller;
 
-class AuthController {
+
+class AuthController  extends Controller {
     private $userModel;
     
     public function __construct() {
@@ -12,11 +14,16 @@ class AuthController {
     }
     
     public function showLogin() {
-        require __DIR__ . '/../views/auth/login.blade.php';
+
+        $this->render('auth/login.blade');
+
+        // require __DIR__ . '/../views/auth/login.blade.php';
     }
     
     public function showRegister() {
-        require __DIR__ . '/../views/auth/register.blade.php';
+        $this->render('auth/register.blade');
+
+        // require __DIR__ . '/../views/auth/register.blade.php';
     }
     
     public function login() {
@@ -33,7 +40,10 @@ class AuthController {
             }
             
             $error = 'Invalid username or password';
-            require 'views/auth/login.blade.php';
+
+            $this->render('auth/login.blade');
+
+            // require 'views/auth/login.blade.php';
         }
     }
     
@@ -65,7 +75,8 @@ class AuthController {
                     $errors[] = 'Username already exists';
                 }
             }
-            
+            $this->render('auth/register.blade');
+
             // require 'views/auth/register.php';
         }
     }
